@@ -1,0 +1,38 @@
+name: Rodar Pipeline de Dados COVID-19
+
+on:
+  push:
+    branches:
+      - main  # Roda quando você atualiza a branch 'main'
+  schedule:
+    - cron: '0 8 * * 1' # Roda toda segunda-feira às 8:00 UTC (5:00 no Brasil)
+
+jobs:
+  build-and-run-pipeline:
+    runs-on: ubuntu-latest  # Usa uma máquina virtual Linux
+
+    steps:
+      - name: 1. Checkout do Repositório
+        uses: actions/checkout@v3
+
+      - name: 2. Configurar Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          cache: 'pip' # Faz cache das dependências
+
+      - name: 3. Instalar Dependências
+        run: |
+          pip install -r requirements.txt
+
+      - name: 4. Rodar o Pipeline de ETL
+        run: |
+          python src/main.py
+
+      # Etapa Bônus: Salvar o banco de dados como um "Artefato"
+      # (Isso permite que você baixe o .db gerado pela Action)
+      - name: 5. Upload do Banco de Dados (Artefato)
+        uses: actions/upload-artifact@v3
+        with:
+          name: covid-analytics-db
+          path: data/covid_analytics.db
