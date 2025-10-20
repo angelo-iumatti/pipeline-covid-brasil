@@ -35,7 +35,7 @@ Demonstrar as competências fundamentais da Engenharia de Dados:
 
 1.  Clone este repositório:
     ```bash
-    git clone [https://github.com/SEU-USUARIO/pipeline-covid-brasil.git](https://github.com/SEU-USUARIO/pipeline-covid-brasil.git)
+    git clone [https://github.com/angelo-iumatti/pipeline-covid-brasil.git](https://github.com/SEU-USUARIO/pipeline-covid-brasil.git)
     cd pipeline-covid-brasil
     ```
 
